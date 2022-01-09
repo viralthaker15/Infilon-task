@@ -15,11 +15,11 @@ const TableRow = (props) => {
 					{rowData[attr].toString().includes('https') ? <img src={rowData[attr]}></img> : rowData[attr]}
 				</td>
 			)}
-			<td className='delete-btn'>
-				<button onClick={() => deleteRow(rowData['id'])} className='btn btn-danger'>DELETE</button>
+			<td className='btn-wrapper'>
 				<button onClick={() => changeCurrentIdx(idx)} type='button' className='btn btn-primary' data-toggle='modal' data-target='#editDataModal'>
 					Edit
 				</button>
+				<button onClick={() => deleteRow(rowData['id'])} className='btn btn-danger'>DELETE</button>
 			</td>
 		</tr>
 	);

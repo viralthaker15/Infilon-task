@@ -1,10 +1,43 @@
+/* ========= Table Scss ========== */
+
 .table-component {
   tr,
   td {
     text-align: center;
     vertical-align: middle;
+    font-size: 18px;
   }
 
-  .delete-button {
+  .btn-wrapper {
+    .btn {
+      width: 50%;
+      margin: 5px;
+    }
+  }
+}
+
+/* ========= Modal Scss ======== */
+.modal-container {
+  .modal-header {
+    .modal-title {
+      font-size: 24px;
+      text-align: center;
+      font-weight: bold;
+    }
+  }
+  .field-wrapper {
+    display: flex;
+    padding: 10px 0px;
+    label {
+      width: 20%;
+      font-size: 18px;
+      font-weight: 600;
+      text-align: left;
+      padding-right: 20px;
+    }
+    input {
+      width: 80%;
+      text-align: center;
+    }
   }
 }

@@ -12,13 +12,13 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const middleware = [];
 middleware.push(thunk);
 if (process.env.NODE_ENV === 'development') {
-  middleware.push(logger);
+	middleware.push(logger);
 }
 
 //store creation
 const store = createStore(
-  combineReducers({ table: tableReducer }),
-  composeEnhancers(applyMiddleware(...middleware))
+	combineReducers({ table: tableReducer }),
+	composeEnhancers(applyMiddleware(...middleware))
 );
 
 export default store;

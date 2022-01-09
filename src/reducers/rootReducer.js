@@ -4,9 +4,9 @@ import storage from 'redux-persist/lib/storage';
 import tableReducer from './tableReducer';
 
 const presistConfig = {
-  key: 'root',
-  storage,
-  whitelist: [],
+	key: 'root',
+	storage,
+	whitelist: [],
 };
 const rootReducer = combineReducers({ table: tableReducer });
 
