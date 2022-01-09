@@ -9,6 +9,12 @@ const tableReducer = (state = INITIAL_STATE, action) => {
         ...state,
         data: action.payload
       };
+    case tableTypes.DELETE_ROW:
+      let newData = state.data.filter(row => row.id !== parseInt(action.payload));
+      return {
+        ...state,
+        data: newData
+      }
     default:
       return state;
   }

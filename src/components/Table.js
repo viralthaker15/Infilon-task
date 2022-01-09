@@ -1,11 +1,11 @@
 /* ============ Import ========  */
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { startGetData } from '../actions/tableAction';
+import { startGetData, deleteRow } from '../actions/tableAction';
 
 /* =========== Code =========== */
 const Table = (props) => {
-  const { tableData, startGetData } = props;
+  const { tableData, startGetData, deleteRowAction } = props;
   useEffect(() => {
     startGetData()
   }, []);
@@ -17,7 +17,10 @@ const Table = (props) => {
   let headerArr = Object.keys(tableData.data[0]);
 
   /* Function to showcase row data */
-  const getTableRow = (row, idx) => <tr key={idx}>{Object.keys(row).map((attr, key) => <td key={key}>{row[attr].toString().includes('https') ? <img src={row[attr]}></img> : row[attr]}</td>)}</tr>;
+  const getTableRow = (row, idx) => <tr key={idx}>{Object.keys(row).map((attr, key) => <td key={key}>{row[attr].toString().includes('https') ? <img src={row[attr]}></img> : row[attr]}</td>)}<td className='delete-btn'><button onClick={(e) => deleteRow(row['id'])} className='btn btn-danger'>DELETE</button></td></tr>;
+
+  /* Function to call delete action */
+  const deleteRow = id => deleteRowAction(id);
 
   return (
     <div>
@@ -38,7 +41,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  startGetData: (data) => dispatch(startGetData(data))
+  startGetData: (data) => dispatch(startGetData(data)),
+  deleteRowAction: (id) => dispatch(deleteRow(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);

@@ -16,3 +16,9 @@ export const startGetData = () => {
     console.log(resData);
   }
 }
+
+/* Action => Delete row */
+export const deleteRow = (idx) => ({
+  type: tableTypes.DELETE_ROW,
+  payload: idx
+});
