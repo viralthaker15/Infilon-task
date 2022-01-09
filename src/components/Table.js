@@ -20,7 +20,7 @@ const Table = (props) => {
 
 	return (
 		<div>
-			<table className="table-component table table-hover table-responsive-xs">
+			<table className="table-component table table-hover table-responsive-sm">
 				<thead>
 					<tr>{headerArr.map((header, idx) => <th scope="col" key={idx}>{header}</th>)}</tr>
 				</thead>
