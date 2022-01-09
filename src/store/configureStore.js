@@ -1,8 +1,8 @@
 // ========================== IMPORT ===========================
-import { createStore, combineReducers, applyMiddleware, compose } from "redux";
-import thunk from "redux-thunk";
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
 import { logger } from 'redux-logger';
-import tableReducer from "../reducers/tableReducer";
+import tableReducer from '../reducers/tableReducer';
 
 //==================== CODE ====================================
 
@@ -20,7 +20,6 @@ const store = createStore(
   combineReducers({ table: tableReducer }),
   composeEnhancers(applyMiddleware(...middleware))
 );
-;
 
 export default store;
 

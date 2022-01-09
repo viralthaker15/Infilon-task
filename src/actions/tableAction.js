@@ -1,4 +1,4 @@
-import tableTypes from "../types/tableTypes";
+import tableTypes from '../types/tableTypes';
 
 /* Action => Get Data from Thunk Action  */
 export const getData = (payload) => ({
@@ -13,9 +13,14 @@ export const startGetData = () => {
     resData = await resData.json();
     resData = resData.data ? resData.data : resData;
     dispatch(getData(resData));
-    console.log(resData);
-  }
-}
+  };
+};
+
+/* Action => Edit row */
+export const editRow = (idx) => ({
+  type: tableTypes.EDIT_ROW,
+  payload: idx
+});
 
 /* Action => Delete row */
 export const deleteRow = (idx) => ({

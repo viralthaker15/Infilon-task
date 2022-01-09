@@ -1,26 +1,23 @@
 /* ============ Import ========  */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { startGetData, deleteRow } from '../actions/tableAction';
+import TableRow from './TableRow';
+import { startGetData } from '../actions/tableAction';
+import EditModal from './EditModal';
 
 /* =========== Code =========== */
 const Table = (props) => {
-  const { tableData, startGetData, deleteRowAction } = props;
+  /* state to get the data from selected Idx of Edit button */
+  const [currentIdx, setCurrentIdx] = useState(0);
+  const { tableData, startGetData } = props;
   useEffect(() => {
-    startGetData()
+    /* Call API action on Component mount */
+    startGetData();
   }, []);
 
-  if (!(Object.keys(tableData).length > 0)) return <></>;
-
-  /* ReFactor Data */
+  if (!(tableData?.data?.length > 0)) return <div>No data found</div>;
 
   let headerArr = Object.keys(tableData.data[0]);
-
-  /* Function to showcase row data */
-  const getTableRow = (row, idx) => <tr key={idx}>{Object.keys(row).map((attr, key) => <td key={key}>{row[attr].toString().includes('https') ? <img src={row[attr]}></img> : row[attr]}</td>)}<td className='delete-btn'><button onClick={(e) => deleteRow(row['id'])} className='btn btn-danger'>DELETE</button></td></tr>;
-
-  /* Function to call delete action */
-  const deleteRow = id => deleteRowAction(id);
 
   return (
     <div>
@@ -29,20 +26,20 @@ const Table = (props) => {
           <tr>{headerArr.map((header, idx) => <th scope="col" key={idx}>{header}</th>)}</tr>
         </thead>
         <tbody>
-          {tableData.data.map((row, key) => getTableRow(row, key))}
+          {tableData.data.map((row, key) => <TableRow changeCurrentIdx={(idx) => setCurrentIdx(idx)} idx={key} key={key} rowData={row} />)}
         </tbody>
       </table>
+      <EditModal currentIdx={currentIdx} />
     </div>
-  )
-}
+  );
+};
 
 const mapStateToProps = state => ({
   tableData: state.table
 });
 
 const mapDispatchToProps = dispatch => ({
-  startGetData: (data) => dispatch(startGetData(data)),
-  deleteRowAction: (id) => dispatch(deleteRow(id))
+  startGetData: (data) => dispatch(startGetData(data))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);
